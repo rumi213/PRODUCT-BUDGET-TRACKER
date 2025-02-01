@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header, footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        input, select, button {
+            padding: 8px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>Personal Budget Tracker</h1>
+    </header>
+
+    <!-- Introduction Section -->
+    <section>
+        <h2>Welcome to Your Budget Tracker</h2>
+        <p>Use this tool to manage your income and expenses effectively. Add your transactions below, and track your budget in the summary table.</p>
+    </section>
+
+    <!-- Add Income/Expense Section -->
+    <section>
+        <h2>Add Income/Expense</h2>
+        <form id="budget-form">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" required>
+
+            <label for="category">Category:</label>
+            <select id="category" required>
+                <option value="Food">Food</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Bills">Bills</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
+
+            <label>Type:</label>
+            <input type="radio" name="type" value="Income" required> Income
+            <input type="radio" name="type" value="Expense" required> Expense
+
+            <button type="submit">Add Transaction</button>
+        </form>
+    </section>
+
+    <!-- Budget Summary Section -->
+    <section>
+        <h2>Budget Summary</h2>
+        <table id="summary-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Transactions will be dynamically added here -->
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>Personal Budget Tracker | Version 1.0</p>
+    </footer>
+
+    <!-- JavaScript to Handle Form Submission -->
+    <script>
+        document.getElementById("budget-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            // Get form values
+            let amount = document.getElementById("amount").value;
+            let category = document.getElementById("category").value;
+            let date = document.getElementById("date").value;
+            let type = document.querySelector('input[name="type"]:checked').value;
+
+            // Insert new row in the table
+            let table = document.getElementById("summary-table").getElementsByTagName("tbody")[0];
+            let newRow = table.insertRow();
+            newRow.innerHTML = <td>${category}</td><td>${amount}</td><td>${date}</td><td>${type}</td>;
+
+            // Clear form
+            document.getElementById("budget-form").reset();
+        });
+    </script>
+
+</body>
+</html>
